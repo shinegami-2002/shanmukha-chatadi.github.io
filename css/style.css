@@ -1,0 +1,100 @@
+/* css/style.css */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Roboto+Mono:wght@300;400&display=swap');
+
+:root {
+    --bg-deep-space: #000010;
+    --text-primary-light: #e0e6f0;
+    --accent-cyan: #00f2ff;
+    --accent-magenta: #ff00c1;
+    --font-display: 'Orbitron', sans-serif;
+    --font-body: 'Roboto Mono', monospace;
+}
+
+/* Basic Resets */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Landing page specific styles are mostly inline in index.html for initial load,
+   but you can add more complex non-critical styles here. */
+
+/* Styles for portfolio.html will go here or in portfolio.css */
+body.portfolio-page {
+    background-color: var(--bg-deep-space);
+    color: var(--text-primary-light);
+    font-family: var(--font-body);
+    line-height: 1.7;
+    /* Allow scroll for portfolio page */
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.site-header-portfolio { /* Example for portfolio page header */
+    padding: 20px 0;
+    text-align: center;
+    border-bottom: 1px solid rgba(0, 242, 255, 0.2);
+    position: fixed;
+    width: 100%;
+    background-color: rgba(0,0,16,0.8);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+}
+.site-header-portfolio h1 {
+    font-family: var(--font-display);
+    color: var(--accent-cyan);
+    font-size: 1.8rem;
+}
+
+.main-portfolio-content {
+    padding-top: 100px; /* Account for fixed header */
+}
+
+.planet-section {
+    min-height: 100vh; /* Make each section take viewport height */
+    padding: 80px 20px;
+    margin-bottom: 50px; /* Space between planets */
+    border-bottom: 1px dashed rgba(0, 242, 255, 0.1);
+    position: relative; /* For potential background elements */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.planet-title {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    color: var(--accent-cyan);
+    margin-bottom: 30px;
+    text-align: center;
+    text-shadow: 0 0 10px var(--accent-cyan);
+}
+
+/* Placeholder for planet-specific canvas if needed */
+.planet-background-canvas {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1;
+    opacity: 0.3; /* Make it subtle */
+}
+
+
+/* Add more styles for cards, typography for portfolio.html as we did before */
+.info-card-planet {
+    background: rgba(10, 20, 40, 0.8);
+    border: 1px solid rgba(0, 242, 255, 0.3);
+    padding: 25px;
+    margin: 15px auto; /* Center cards */
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    max-width: 700px; /* Control card width */
+    width: 90%;
+}
+/* ... (other card styles from previous magnum opus) ... */

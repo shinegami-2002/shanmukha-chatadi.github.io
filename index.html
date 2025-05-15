@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shanmukha Srinivas Sai Chatadi - Launch Sequence</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Inline critical CSS for landing page, rest in style.css */
+        body.landing {
+            margin: 0;
+            overflow: hidden; /* No scrollbars on landing */
+            background-color: #000010; /* Deep space */
+            color: #e0e6f0;
+            font-family: 'Orbitron', sans-serif; /* Assuming Orbitron from previous */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            cursor: none; /* Hide default cursor, spaceship will replace it */
+        }
+        #landing-starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .spaceship-cursor {
+            position: fixed;
+            width: 40px; /* Adjust size */
+            height: 40px;
+            background-image: url('assets/images/spaceship.png'); /* Path to your spaceship image */
+            background-size: contain;
+            background-repeat: no-repeat;
+            pointer-events: none; /* So it doesn't interfere with clicks */
+            transform: translate(-50%, -50%) rotate(0deg); /* Center and initial rotation */
+            z-index: 9999;
+            transition: transform 0.1s linear; /* Smooth rotation */
+        }
+        .landing-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            animation: fadeInContent 2s 1s ease-out forwards;
+            opacity: 0;
+        }
+        @keyframes fadeInContent {
+            to { opacity: 1; }
+        }
+
+        .landing-name {
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #fff;
+            text-shadow: 0 0 15px #00f2ff, 0 0 30px #00f2ff;
+        }
+        .landing-subtitle {
+            font-family: 'Roboto Mono', monospace;
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: #a0b0c0;
+            margin-bottom: 2rem;
+        }
+        .contact-links-landing a {
+            color: #00f2ff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.1rem;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+        .contact-links-landing a:hover {
+            color: #fff;
+            text-shadow: 0 0 10px #00f2ff;
+        }
+
+        #warp-button {
+            margin-top: 3rem;
+            padding: 15px 35px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: #02040a;
+            background-color: #00f2ff;
+            border: none;
+            border-radius: 50px; /* Pill shape */
+            cursor: none; /* Will be spaceship */
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 15px #00f2ff, 0 0 30px #00f2ff inset;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0; /* GSAP will animate this */
+            animation: pulseGlow 2s infinite alternate;
+        }
+        #warp-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px #00f2ff, 0 0 45px #00f2ff inset, 0 0 10px #fff;
+        }
+        @keyframes pulseGlow {
+            from { box-shadow: 0 0 10px #00f2ff, 0 0 20px #00f2ff inset; }
+            to { box-shadow: 0 0 20px #00aaff, 0 0 35px #00aaff inset; }
+        }
+
+        /* Warp Active State */
+        body.warp-active #landing-starfield {
+            /* JS will handle star streaking */
+        }
+        body.warp-active .landing-content {
+            animation: fadeOutContent 0.5s ease-out forwards;
+        }
+        @keyframes fadeOutContent {
+            to { opacity: 0; transform: scale(0.8); }
+        }
+    </style>
+</head>
+<body class="landing">
+    <canvas id="landing-starfield"></canvas>
+    <div class="spaceship-cursor" id="spaceshipCursor"></div>
+
+    <div class="landing-content">
+        <h1 class="landing-name">Shanmukha Srinivas Sai Chatadi</h1>
+        <p class="landing-subtitle">Explorer of Code & Data Universes</p>
+        <div class="contact-links-landing">
+            <a href="mailto:schatad@ncsu.edu">Email</a> |
+            <a href="https://linkedin.com/in/shanmukha-chatadi" target="_blank" rel="noopener noreferrer">LinkedIn</a> |
+            <a href="https://github.com/shinegami-2002" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </div>
+        <button id="warp-button">Engage Hyperdrive</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="js/main.js"></script> </body>
+</html>
