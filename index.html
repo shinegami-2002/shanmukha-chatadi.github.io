@@ -3,133 +3,797 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shanmukha Srinivas Sai Chatadi - Launch Sequence</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Shanmukha Srinivas Sai Chatadi - Cosmic Architect</title>
+    
+    <meta name="description" content="Portfolio of Shanmukha Srinivas Sai Chatadi, a Computer Scientist specializing in Full-Stack Development, AI, and Machine Learning. Explore projects, skills, and experience.">
+    <meta property="og:title" content="Shanmukha Srinivas Sai Chatadi - Cosmic Architect">
+    <meta property="og:description" content="Portfolio of Shanmukha Srinivas Sai Chatadi, showcasing expertise in Full-Stack Development, AI, and Machine Learning.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="YOUR_WEBSITE_URL_HERE"> 
+    <!-- <meta property="og:image" content="YOUR_WEBSITE_URL_HERE/social-preview-image.jpg"> --> 
+
+    <link rel="icon" href="favicon.ico" sizes="any"> 
+    <link rel="icon" href="favicon.svg" type="image/svg+xml"> 
+    <link rel="apple-touch-icon" href="apple-touch-icon.png"> 
+
     <style>
-        /* Inline critical CSS for landing page, rest in style.css */
-        body.landing {
-            margin: 0;
-            overflow: hidden; /* No scrollbars on landing */
-            background-color: #000010; /* Deep space */
-            color: #e0e6f0;
-            font-family: 'Orbitron', sans-serif; /* Assuming Orbitron from previous */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Roboto+Mono:wght@300;400&display=swap');
+
+        :root {
+            --bg-color: #02040a; 
+            --primary-text: #e0e6f0; 
+            --secondary-text: #8899a6; 
+            --accent-cyan: #00f2ff;
+            --accent-magenta: #ff00c1;
+            --accent-blue: #4d88ff;
+            --card-bg: rgba(10, 20, 40, 0.75); 
+            --card-border: rgba(0, 242, 255, 0.25); 
+            --glow-cyan: rgba(0, 242, 255, 0.6);
+            --font-display: 'Orbitron', sans-serif; 
+            --font-body: 'Roboto Mono', monospace; 
+            --container-width: 1100px;
+            --border-radius: 8px;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            color: var(--primary-text);
+            overflow-x: hidden;
             min-height: 100vh;
-            cursor: none; /* Hide default cursor, spaceship will replace it */
-        }
-        #landing-starfield {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-        .spaceship-cursor {
-            position: fixed;
-            width: 40px; /* Adjust size */
-            height: 40px;
-            background-image: url('assets/images/spaceship.png'); /* Path to your spaceship image */
-            background-size: contain;
-            background-repeat: no-repeat;
-            pointer-events: none; /* So it doesn't interfere with clicks */
-            transform: translate(-50%, -50%) rotate(0deg); /* Center and initial rotation */
-            z-index: 9999;
-            transition: transform 0.1s linear; /* Smooth rotation */
-        }
-        .landing-content {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            animation: fadeInContent 2s 1s ease-out forwards;
-            opacity: 0;
-        }
-        @keyframes fadeInContent {
-            to { opacity: 1; }
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.7;
         }
 
-        .landing-name {
-            font-size: clamp(2.5rem, 8vw, 6rem);
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: #fff;
-            text-shadow: 0 0 15px #00f2ff, 0 0 30px #00f2ff;
+        #preloader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: var(--bg-color); z-index: 10000; display: flex;
+            flex-direction: column; align-items: center; justify-content: center;
+            color: var(--accent-cyan); font-family: var(--font-display);
         }
-        .landing-subtitle {
-            font-family: 'Roboto Mono', monospace;
-            font-size: clamp(1rem, 3vw, 1.5rem);
-            color: #a0b0c0;
-            margin-bottom: 2rem;
+        .preloader-logo { font-size: 1.8rem; margin-bottom: 20px; text-shadow: 0 0 10px var(--glow-cyan); }
+        .preloader-bar-container { width: 200px; height: 3px; background-color: rgba(0, 242, 255, 0.2); border-radius: 3px; overflow: hidden; }
+        .preloader-bar { width: 0%; height: 100%; background-color: var(--accent-cyan); transition: width 0.5s ease; }
+        #preloader.fade-out { opacity: 0; transition: opacity 0.5s ease-out; }
+
+        #threejs-nebula { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        .site-wrapper { position: relative; z-index: 1; }
+        .content-container { width: 90%; max-width: var(--container-width); margin: 0 auto; padding: 0 15px; }
+
+        #sticky-nav {
+            position: fixed; top: -100px; left: 0; width: 100%;
+            background-color: rgba(2, 4, 10, 0.85); backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px); z-index: 999; padding: 12px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); border-bottom: 1px solid var(--card-border);
         }
-        .contact-links-landing a {
-            color: #00f2ff;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 1.1rem;
-            transition: color 0.3s ease, text-shadow 0.3s ease;
+        #sticky-nav.visible { top: 0; }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { font-family: var(--font-display); font-size: 1rem; color: var(--accent-cyan); }
+        #sticky-nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; } /* Adjusted gap for more items */
+        #sticky-nav ul li a {
+            color: var(--primary-text); text-decoration: none; font-size: 0.85rem; /* Slightly smaller for more links */
+            padding: 6px 10px; border-radius: var(--border-radius); font-family: var(--font-body);
         }
-        .contact-links-landing a:hover {
-            color: #fff;
-            text-shadow: 0 0 10px #00f2ff;
+        #sticky-nav ul li a:hover, #sticky-nav ul li a.active { color: var(--accent-magenta); background-color: rgba(255, 0, 193, 0.1); }
+
+        .hero-sector {
+            min-height: 100vh; display: flex; flex-direction: column; align-items: center;
+            justify-content: center; text-align: center; padding: 20px; position: relative;
+        }
+        .hero-title-main {
+            font-family: var(--font-display); font-size: clamp(2.5rem, 7vw, 5.5rem); font-weight: 700;
+            line-height: 1.15; margin-bottom: 1rem; color: #fff;
+            text-shadow: 0 0 10px var(--glow-cyan), 0 0 20px var(--glow-cyan), 0 0 35px var(--accent-magenta);
+            opacity: 0; 
+        }
+        .hero-title-main .char { display: inline-block; transform: translateY(40px) scale(0.8); opacity: 0; }
+        .hero-subtitle-role {
+            font-size: clamp(1rem, 2.5vw, 1.4rem); color: var(--secondary-text);
+            margin-bottom: 2.5rem; letter-spacing: 1px; opacity: 0; transform: translateY(20px); 
+        }
+        .hero-nav-links a {
+            color: var(--accent-cyan); text-decoration: none; margin: 0 12px;
+            font-size: 1.05rem; font-weight: 400; padding: 10px 20px;
+            border: 1px solid var(--accent-cyan); border-radius: var(--border-radius);
+            opacity: 0; transform: translateY(20px); position: relative; 
+        }
+        .hero-nav-links a:hover { color: var(--bg-color); background-color: var(--accent-cyan); }
+
+        .scroll-prompt {
+            position: absolute; bottom: 4vh; left: 50%; transform: translateX(-50%);
+            opacity: 0; color: var(--secondary-text); font-size: 0.85rem;
+            display: flex; flex-direction: column; align-items: center;
+        }
+        .scroll-prompt-icon {
+            width: 20px; height: 32px; border: 1.5px solid var(--secondary-text);
+            border-radius: 10px; position: relative; margin-bottom: 6px;
+        }
+        .scroll-prompt-icon::before {
+            content: ''; width: 3px; height: 6px; background: var(--secondary-text);
+            border-radius: 1.5px; position: absolute; top: 5px; left: 50%; transform: translateX(-50%);
         }
 
-        #warp-button {
-            margin-top: 3rem;
-            padding: 15px 35px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
-            color: #02040a;
-            background-color: #00f2ff;
-            border: none;
-            border-radius: 50px; /* Pill shape */
-            cursor: none; /* Will be spaceship */
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 0 15px #00f2ff, 0 0 30px #00f2ff inset;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            opacity: 0; /* GSAP will animate this */
-            animation: pulseGlow 2s infinite alternate;
+        .data-section { padding: 100px 0 60px; }
+        .section-header {
+            font-family: var(--font-display); font-size: clamp(2rem, 4.5vw, 3.2rem); font-weight: 500;
+            text-align: center; margin-bottom: 60px; position: relative; 
+            color: var(--primary-text); letter-spacing: 1px; opacity: 0; transform: translateY(30px); 
         }
-        #warp-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 25px #00f2ff, 0 0 45px #00f2ff inset, 0 0 10px #fff;
+        .section-header .themed-prefix { color: var(--secondary-text); margin-right: 0.5em; font-weight: 400; }
+        
+        .info-card {
+            background: var(--card-bg); border: 1px solid var(--card-border);
+            padding: 30px; margin-bottom: 30px; border-radius: var(--border-radius);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            opacity: 0; transform: perspective(1000px) rotateX(-15deg) translateY(40px); 
+            transform-origin: top center;
         }
-        @keyframes pulseGlow {
-            from { box-shadow: 0 0 10px #00f2ff, 0 0 20px #00f2ff inset; }
-            to { box-shadow: 0 0 20px #00aaff, 0 0 35px #00aaff inset; }
+        .data-section .info-card:hover {
+            transform: perspective(1000px) rotateX(0deg) translateY(-8px) scale(1.015);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.4), 0 0 20px var(--glow-cyan);
+        }
+        .card-heading {
+            font-family: var(--font-display); font-size: 1.3rem; font-weight: 500;
+            color: var(--accent-cyan); margin-bottom: 10px; 
+            display: flex; align-items: center;
+            overflow-wrap: break-word; word-break: break-word; line-height: 1.3; 
+        }
+        .card-heading > span { flex-shrink: 1; min-width: 0; } /* For text part of heading if icon is present */
+        .project-card .card-heading { /* Specific style for project cards without Lottie icon */
+             color: var(--accent-cyan); /* Or var(--primary-text) if preferred */
         }
 
-        /* Warp Active State */
-        body.warp-active #landing-starfield {
-            /* JS will handle star streaking */
+        .lottie-icon { 
+            width: 32px; height: 32px; margin-right: 12px; 
+            filter: drop-shadow(0 0 5px var(--accent-cyan));
+            flex-shrink: 0; 
         }
-        body.warp-active .landing-content {
-            animation: fadeOutContent 0.5s ease-out forwards;
+        .card-subheading { font-size: 0.9rem; color: var(--secondary-text); margin-bottom: 15px; }
+        .info-card ul { list-style: none; padding-left: 0; }
+        .info-card ul li { margin-bottom: 10px; position: relative; padding-left: 25px; font-size: 0.95rem; line-height: 1.6; }
+        .info-card ul li::before { content: "◈"; position: absolute; left: 0; color: var(--accent-cyan); font-size: 1em; top: 2px; }
+        .tech-capsules { font-size: 0.8rem; color: var(--accent-magenta); margin: 18px 0 12px; display: flex; flex-wrap: wrap; gap: 8px; }
+        .tech-capsules span { background-color: rgba(255, 0, 193, 0.1); border: 1px solid rgba(255, 0, 193, 0.3); padding: 3px 10px; border-radius: 15px; }
+        .card-link-button {
+            display: inline-block; color: var(--accent-blue); text-decoration: none;
+            font-weight: 400; margin-top: 18px; padding: 8px 18px;
+            border: 1px solid var(--accent-blue); border-radius: var(--border-radius);
         }
-        @keyframes fadeOutContent {
-            to { opacity: 0; transform: scale(0.8); }
+        .card-link-button:hover { background-color: var(--accent-blue); color: var(--bg-color); }
+
+        .grid-layout-skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+        .grid-layout-skills .card-heading { color: var(--primary-text); } 
+        .publication-card .card-heading { font-size: 1.15rem; color: var(--primary-text); }
+        .publication-card .authorship { font-style: italic; color: var(--secondary-text); font-size: 0.85rem; display: block; margin-top: 5px; margin-bottom: 8px; }
+        .publication-card .status { font-size: 0.8rem; color: var(--accent-cyan); display: block; margin-top: 3px; }
+
+
+        .main-footer {
+            text-align: center; padding: 50px 0 30px; margin-top: 80px;
+            color: var(--secondary-text); font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .main-footer p { margin-bottom: 6px; opacity: 0.7; }
+
+        a:focus-visible, button:focus-visible, .card-link-button:focus-visible, 
+        .hero-nav-links a:focus-visible, #sticky-nav ul li a:focus-visible {
+            outline: 2px solid var(--accent-magenta); outline-offset: 3px; background-color: rgba(255, 0, 193, 0.15);
+        }
+        a:focus, button:focus, .card-link-button:focus, .hero-nav-links a:focus, #sticky-nav ul li a:focus { outline: none; }
+
+        @media (prefers-reduced-motion: no-preference) {
+            .scroll-prompt-icon::before { animation: scroll-wheel-pulse 2s infinite ease-in-out; }
+            @keyframes scroll-wheel-pulse {
+                0% { transform: translate(-50%, 0); opacity: 1;}
+                50% { transform: translate(-50%, 8px); opacity: 0;}
+                100% { transform: translate(-50%, 0); opacity: 1;}
+            }
+            .hero-nav-links a { transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; }
+            .hero-nav-links a:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 0 15px var(--glow-cyan); }
+            .info-card { transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1), box-shadow 0.4s ease; }
+            .data-section .info-card:hover {
+                transform: perspective(1000px) rotateX(0deg) translateY(-8px) scale(1.015);
+                box-shadow: 0 12px 35px rgba(0,0,0,0.4), 0 0 20px var(--glow-cyan);
+            }
+            .card-link-button { transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease; }
+            .card-link-button:hover { transform: translateY(-2px); }
+            #sticky-nav { transition: top 0.4s ease-in-out; }
+            #sticky-nav ul li a { transition: color 0.3s ease, background-color 0.3s ease; }
         }
     </style>
 </head>
-<body class="landing">
-    <canvas id="landing-starfield"></canvas>
-    <div class="spaceship-cursor" id="spaceshipCursor"></div>
+<body>
+    <!-- Preloader, Nav, Canvas (largely unchanged) -->
+    <div id="preloader">
+        <div class="preloader-logo">COSMIC_INITIATING...</div>
+        <div class="preloader-bar-container"><div class="preloader-bar"></div></div>
+    </div>
 
-    <div class="landing-content">
-        <h1 class="landing-name">Shanmukha Srinivas Sai Chatadi</h1>
-        <p class="landing-subtitle">Explorer of Code & Data Universes</p>
-        <div class="contact-links-landing">
-            <a href="mailto:schatad@ncsu.edu">Email</a> |
-            <a href="https://linkedin.com/in/shanmukha-chatadi" target="_blank" rel="noopener noreferrer">LinkedIn</a> |
-            <a href="https://github.com/shinegami-2002" target="_blank" rel="noopener noreferrer">GitHub</a>
+    <nav id="sticky-nav">
+        <div class="content-container nav-container">
+            <div class="nav-logo">S.S.S.C. // Cosmic Architect</div>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#publications">Publications</a></li>
+                <li><a href="#leadership">Leadership</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#achievements">Achievements</a></li>
+                <li><a href="#courses">Courses</a></li>
+            </ul>
         </div>
-        <button id="warp-button">Engage Hyperdrive</button>
+    </nav>
+    <canvas id="threejs-nebula"></canvas>
+
+    <div class="site-wrapper">
+        <header class="hero-sector">
+            <!-- Hero content (largely unchanged) -->
+            <div class="content-container">
+                <h1 class="hero-title-main"></h1>
+                <p class="hero-subtitle-role">Computer Scientist | Full-Stack Artisan | AI & Machine Learning Architect</p>
+                <div class="hero-nav-links">
+                    <a href="mailto:shanmukh.nitpy@gmail.com">Email Me</a> <!-- Updated from CV -->
+                    <a href="https://linkedin.com/in/shanmukha-chatadi" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    <a href="https://github.com/shinegami-2002" target="_blank" rel="noopener noreferrer">GitHub</a>
+                </div>
+            </div>
+            <div class="scroll-prompt"><div class="scroll-prompt-icon"></div>Scroll to Explore</div>
+        </header>
+
+        <main class="content-container">
+            <section id="about" class="data-section">
+                <h2 class="section-header"><span class="themed-prefix">MISSION_PROFILE //</span> About</h2>
+                <div class="info-card">
+                    <p>As a Computer Science graduate from the National Institute of Technology Puducherry (NITPY), I fuse rigorous expertise in full-stack development (Python, Node.js, React.js, MongoDB) with a deep-seated drive to explore the frontiers of data science, machine learning, and deep learning (TensorFlow, Scikit-learn, Keras). My work focuses on architecting scalable, intelligent systems that not only decipher complex data streams but also manifest as intuitive, high-impact user experiences. I am passionate about the alchemy of transforming raw data into actionable intelligence and abstract algorithms into tangible innovation, with a strong foundation in software development principles and a keen interest in quantum computing applications.</p>
+                </div>
+            </section>
+
+            <section id="skills" class="data-section">
+                <h2 class="section-header"><span class="themed-prefix">CORE_COMPUTATIONAL_MATRIX //</span> Skills</h2>
+                <div class="grid-layout-skills">
+                    <div class="info-card">
+                        <h3 class="card-heading"><div class="lottie-icon" id="lottie-code" aria-hidden="true"></div><span>CODE_&_ALGORITHMS</span></h3>
+                        <p>Python (Mastery), C++, C, JavaScript (Node.js, React, jQuery), HTML5, CSS3, SQL (MySQL), WordPress, RESTful API Design.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3 class="card-heading"><div class="lottie-icon" id="lottie-ai" aria-hidden="true"></div><span>ARTIFICIAL_INTELLIGENCE</span></h3>
+                        <p>Deep Learning (CNN, RNN, Transformers, Xception, MobileNet, EfficientNet), TensorFlow, Keras, Scikit-learn, NLP, Computer Vision, Predictive Modeling, XGBoost, SVM, Ensemble Stacking, Apriori Algorithm.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3 class="card-heading"><div class="lottie-icon" id="lottie-cloud" aria-hidden="true"></div><span>SYSTEMS_&_PLATFORMS</span></h3>
+                        <p>Git, Docker, MongoDB, NumPy, Matplotlib, Pandas, Seaborn, Mlxtend, AWS, Azure, Render, Cirq (Quantum Computing), FastAPI, Streamlit.</p>
+                    </div>
+                </div>
+                 <div class="info-card"> <!-- Soft Skills -->
+                    <h3 class="card-heading" style="color: var(--primary-text);"><span>PROFESSIONAL_APTITUDE // Soft Skills</span></h3>
+                    <p>Leadership, Event Management, Public Speaking, Team Management, Time Management, Effective Communication, Problem-Solving, Strategic Planning, Creative Thinking.</p>
+                </div>
+            </section>
+
+            <section id="projects" class="data-section">
+                <h2 class="section-header"><span class="themed-prefix">FLAGSHIP_CONSTELLATIONS //</span> Projects</h2>
+                <!-- Project Cards - Lottie icons removed from individual project cards -->
+                <div class="info-card project-card">
+                    <h3 class="card-heading">Potato Disease Classification (Diverse Feature Extraction & ML)</h3>
+                    <p class="card-subheading">Under guidance of Prof. B. Surendiran</p>
+                    <div class="tech-capsules"><span>Python</span><span>Scikit-learn</span><span>XGBoost</span><span>SVM</span><span>TensorFlow</span></div>
+                    <ul>
+                        <li>Led comparison of ML models (logistic regression, SVM, random forest, XGBoost, k-NN, naive Bayes, decision tree) for optimal model evaluation.</li>
+                        <li>Implemented diverse feature extraction methods (pixel features, HOG, LBP).</li>
+                        <li>Optimized a deep learning model using TensorFlow, achieving 98.9% accuracy.</li>
+                    </ul>
+                </div>
+                <div class="info-card project-card">
+                    <h3 class="card-heading">Enhancing Tea Leaf Disease Classification (Data Augmentation, Ensemble Stacking)</h3>
+                     <p class="card-subheading">Under guidance of Prof. B. Surendiran</p>
+                    <div class="tech-capsules"><span>Python</span><span>XGBoost</span><span>SVM</span><span>Ensemble Methods</span></div>
+                    <ul>
+                        <li>Implemented diverse ML models (XGBoost, SVM, Logistic Regression, Decision Tree) for tea leaf disease analysis.</li>
+                        <li>Applied sophisticated feature extraction (pixel features, bag of visual words, color histograms).</li>
+                        <li>Employed advanced ensemble stacking methodologies for robust and reliable classification.</li>
+                    </ul>
+                </div>
+                <div class="info-card project-card">
+                    <h3 class="card-heading">Early Detection of Skin Cancer (Deep Learning & Hyperparameter Tuning)</h3>
+                    <p class="card-subheading">Under guidance of Prof. B. Surendiran</p>
+                    <div class="tech-capsules"><span>Python</span><span>TensorFlow</span><span>Deep Learning</span><span>EfficientNet</span><span>Xception</span></div>
+                    <ul>
+                        <li>Addressed class imbalance using data augmentation for a representative skin cancer dataset.</li>
+                        <li>Conducted comprehensive optimization with ADAM, SGD, ADAGRAD optimizers and diverse learning rates.</li>
+                        <li>Systematically selected optimal models (Xception, MobileNet, EfficientNet) for a refined detection system.</li>
+                    </ul>
+                </div>
+                <div class="info-card project-card">
+                    <h3 class="card-heading">Change Detection In Hyperspectral Images (GetNet)</h3>
+                     <p class="card-subheading">2023</p>
+                    <div class="tech-capsules"><span>Python</span><span>TensorFlow</span><span>Neural Networks</span><span>re3fcn</span></div>
+                    <ul>
+                        <li>Implemented GetNet architecture for complex spectral/temporal feature extraction.</li>
+                        <li>Conducted rigorous preprocessing of diverse hyperspectral datasets for quality and relevance.</li>
+                        <li>Developed and deployed change detection algorithms using TensorFlow.</li>
+                    </ul>
+                </div>
+                 <div class="info-card project-card">
+                    <h3 class="card-heading">Change Detection in Land Use Land Cover (LULC) Images</h3>
+                    <p class="card-subheading">Corresponds to TERRAFORMR (LULC Thesis) from original site | 2023</p>
+                    <div class="tech-capsules"><span>Python</span><span>TensorFlow</span><span>Deep Learning</span><span>GIS</span><span>Dual-Attention NN</span></div>
+                    <ul>
+                        <li>Implemented cutting-edge spatio-temporal dual-attention neural network for analyzing historical land use changes.</li>
+                        <li>Developed a dual-branch encoder-decoder network, overcoming class imbalance without pre-training.</li>
+                        <li>Achieved 94.11% overall accuracy on Dakshina Kannada LULC dataset.</li>
+                    </ul>
+                     <a href="https://github.com/shinegami-2002/LULC-ChangeDetection" target="_blank" rel="noopener noreferrer" class="card-link-button">View on GitHub</a>
+                </div>
+                <div class="info-card project-card">
+                    <h3 class="card-heading">Quantum Neural Network Classification on Fashion MNIST</h3>
+                    <p class="card-subheading">2023</p>
+                    <div class="tech-capsules"><span>Python</span><span>TensorFlow-Quantum</span><span>Cirq</span><span>QNN</span></div>
+                    <ul>
+                        <li>Successfully implemented a Quantum Neural Network (QNN) for Fashion MNIST classification.</li>
+                        <li>Leveraged TensorFlow-Quantum and Cirq, showcasing expertise in quantum computing.</li>
+                        <li>Achieved an outstanding 91% accuracy, demonstrating QNN effectiveness.</li>
+                    </ul>
+                </div>
+                <div class="info-card project-card">
+                    <h3 class="card-heading">Task Manager with Node.js, MongoDB, RESTful API</h3>
+                     <p class="card-subheading">Corresponds to CYGNUS (SlackPoint) concepts from original site, but backend focused | 2022</p>
+                    <div class="tech-capsules"><span>Node.js</span><span>MongoDB</span><span>RESTful API</span><span>HTML</span><span>CSS</span><span>JavaScript</span><span>jQuery</span></div>
+                    <ul>
+                        <li>Developed a scalable task manager using Node.js backend and MongoDB database.</li>
+                        <li>Designed an intuitive user-friendly interface with HTML, CSS, and JavaScript.</li>
+                        <li>Implemented a robust RESTful API for efficient server-client communication.</li>
+                        <li>Integrated jQuery for dynamic data rendering and real-time updates.</li>
+                    </ul>
+                     <a href="https://github.com/shinegami-2002/SlackPoint" target="_blank" rel="noopener noreferrer" class="card-link-button">Related GitHub (SlackPoint)</a>
+                </div>
+                <div class="info-card project-card"> <!-- ORION from original site -->
+                    <h3 class="card-heading">Project: ORION (AI ChatBot)</h3>
+                    <div class="tech-capsules"><span>Python</span><span>FastAPI</span><span>Streamlit</span><span>GenAI</span><span>Render</span></div>
+                    <ul>
+                        <li>Engineered a low-latency (40% reduction) generative AI interaction core.</li>
+                        <li>Implemented robust, secure API integration and scalable backend architecture.</li>
+                        <li>Designed a dynamic, user-centric frontend for intuitive AI engagement.</li>
+                    </ul>
+                    <a href="https://github.com/shinegami-2002/AI-ChatBot" target="_blank" rel="noopener noreferrer" class="card-link-button">View on GitHub</a>
+                </div>
+                 <div class="info-card project-card"> <!-- NAVIGATOR from original site -->
+                    <h3 class="card-heading">Project: NAVIGATOR (PackTravel)</h3>
+                    <div class="tech-capsules"><span>Django</span><span>JavaScript</span><span>MongoDB</span><span>Google Maps API</span><span>ML</span></div>
+                    <ul>
+                        <li>Architected a real-time collaborative mobility platform with intelligent routing.</li>
+                        <li>Deployed an ML-driven fare prediction model, optimizing travel costs by ~15%.</li>
+                        <li>Ensured system integrity via comprehensive testing protocols (32 system, 4 unit tests).</li>
+                    </ul>
+                    <a href="https://github.com/shinegami-2002/PackTravel" target="_blank" rel="noopener noreferrer" class="card-link-button">View on GitHub</a>
+                </div>
+                <div class="info-card project-card"> <!-- ORACLE from original site -->
+                    <h3 class="card-heading">Project: ORACLE (RecSys)</h3>
+                    <div class="tech-capsules"><span>Collaborative Filtering</span><span>SVD</span><span>GMF</span><span>NeuMF</span><span>Python</span></div>
+                    <ul>
+                        <li>Implemented and refined a suite of advanced recommendation algorithms.</li>
+                        <li>Achieved a 20% uplift in recommendation accuracy through sophisticated model ensembling.</li>
+                        <li>Attained an RMSE of 0.7762, delivering highly personalized content discovery pathways.</li>
+                    </ul>
+                    <a href="https://github.com/shinegami-2002/Movie-Recommendation-System" target="_blank" rel="noopener noreferrer" class="card-link-button">View on GitHub</a>
+                </div>
+            </section>
+
+            <section id="experience" class="data-section">
+                <h2 class="section-header"><span class="themed-prefix">SERVICE_RECORD //</span> Experience</h2>
+                <div class="info-card">
+                    <h3 class="card-heading">Data Scientist Intern</h3>
+                    <p class="card-subheading">Treo Soft IT Solutions Pvt Ltd, Bengaluru, Karnataka, India | Jun 2022 - Sep 2022</p>
+                    <ul>
+                        <li>Leveraged Apriori algorithm to analyze large-scale transactional data, extracting valuable insights into customer behavior. (Original: 15% net sales uplift from pattern identification)</li>
+                        <li>Generated comprehensive reports and visualizations to communicate findings and recommendations. (Original: Engineered recommendation engine boosting revenue by 35%)</li>
+                        <li>Utilized market basket analysis to uncover cross-selling/upselling opportunities, increasing revenue and customer satisfaction.</li>
+                        <li>Achieved significant increase in net sales via strategic product recommendations and promotions.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="publications" class="data-section">
+                <h2 class="section-header"><span class="themed-prefix">RESEARCH_ARCHIVES //</span> Publications</h2>
+                <div class="info-card publication-card">
+                    <h3 class="card-heading">Potato Disease Classification Using Diverse Feature Extraction Methods and Machine Learning Models</h3>
+                    <span class="authorship">C. Shanmukh Srinivas Sai, Tejus Paturu, B. Surendiran, J. Dhakshayani</span>
+                    <p>HIS 2023 Paper ID: #73. Accepted for presentation at 23rd International Conference on Hybrid Intelligent Systems (HIS 2023), Dec 11-15, 2023. Publication in Springer Verlag proceedings.</p>
+                    <span class="status">Status: Accepted & To be Published</span>
+                </div>
+                <div class="info-card publication-card">
+                    <h3 class="card-heading">Enhancing Tea Leaf Disease Classification: Leveraging Data Augmentation, Diverse Feature Extraction Techniques, and Ensemble Stacking with Machine Learning Models</h3>
+                     <span class="authorship">Somesh K, C. Shanmukh Srinivas Sai, Nithin Mude, B. Surendiran, J. Dhakshayani</span>
+                    <p>The Computer Science Journal (ISSN: 1508-2806; e-ISSN: 2300-7036).</p>
+                    <span class="status">Status: Under Review</span>
+                </div>
+                 <div class="info-card publication-card">
+                    <h3 class="card-heading">Early Detection of Skin Cancer through Deep Learning-Based Categorization with Hyperparameter Tuning</h3>
+                    <span class="authorship">C. Shanmukh Srinivas Sai, Somesh K, Nithin Mude, B. Surendiran, J. Dhakshayani</span>
+                    <span class="status">Status: Manuscript in Submission</span>
+                </div>
+            </section>
+
+            <section id="leadership" class="data-section">
+                <h2 class="section-header"><span class="themed-prefix">COMMAND_ROLES //</span> Leadership & Volunteer</h2>
+                <div class="info-card">
+                    <h3 class="card-heading">President, Rotaract Club, NITPY</h3>
+                    <p class="card-subheading">2022 - 2023</p>
+                    <ul>
+                        <li>Successfully organized and managed over 10 events including blood donation camps, panel discussions, slow cycling, and a wall of kindness initiative.</li>
+                        <li>Demonstrated strong leadership skills by planning and leading weekly meetings and programs.</li>
+                        <li>Raised awareness among students and the public about various social stigmas through informative sessions.</li>
+                    </ul>
+                </div>
+                 <div class="info-card">
+                    <h3 class="card-heading">Vice-President, ACE (Computer Science Association), NITPY</h3>
+                    <p class="card-subheading">2022 - 2023</p>
+                    <ul>
+                        <li>Spearheaded planning and execution of events like workshops and hackathons.</li>
+                        <li>Took initiative in identifying and inviting industry experts for talks and workshops.</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h3 class="card-heading">Co-founder, Event Organizer of Zer01Coded, NITPY</h3>
+                    <p class="card-subheading">2021 - 2022</p>
+                    <ul>
+                        <li>Co-founded and led a dynamic coding club, orchestrating quizzes, competitive programming, and web dev workshops.</li>
+                        <li>Initiated and conducted Python classes, benefiting over 150 students.</li>
+                    </ul>
+                </div>
+                 <div class="info-card">
+                    <h3 class="card-heading">Class Representative, B. Tech CSE, NITPY</h3>
+                    <p class="card-subheading">2020 - 2022</p>
+                    <ul>
+                        <li>Served as a liaison between class and department/college administration for two continuous years.</li>
+                        <li>Effectively communicated and addressed student concerns, needs, and feedback.</li>
+                    </ul>
+                </div>
+                 <div class="info-card">
+                    <h3 class="card-heading">Registration Head of Le Ceil (Cultural Fest of NITPY)</h3>
+                    <p class="card-subheading">2022 - 2022</p>
+                    <ul>
+                        <li>Led seamless registration processes, managing attendee registrations.</li>
+                        <li>Supervised a team of over 70 students for hospitality and coordination.</li>
+                    </ul>
+                </div>
+                 <div class="info-card">
+                    <h3 class="card-heading">Creative Head of Finance Club of NITPY</h3>
+                    <p class="card-subheading">2023 - 2024</p>
+                    <ul>
+                        <li>Collaborating to generate innovative ideas and strategies for club activities.</li>
+                        <li>Playing a key role in planning future events and enhancing club offerings.</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h3 class="card-heading">Volunteer Experience</h3>
+                     <ul>
+                        <li>Volunteered for blood donation camps at NITPY (2022).</li>
+                        <li>Taught Physics for underprivileged students preparing for IIT-JEE via LEAP program at NITPY (2021).</li>
+                        <li>Volunteer at National Service Scheme (NSS), India (2021).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="education" class="data-section">
+                <h2 class="section-header"><span class="themed-prefix">ACADEMIC_LOGS //</span> Education</h2>
+                 <div class="info-card"> <!-- Added MS details from original website -->
+                    <h3 class="card-heading">North Carolina State University</h3>
+                    <p class="card-subheading">Master of Science, Computer Science (AI Focus) | Aug 2024 - Jun 2026 (Est.)</p>
+                    <p>CGPA: 3.73/4.0 (Current). Specialization: Advanced Data Analysis, Algorithmic Architecture, Distributed Software Systems.</p>
+                </div>
+                <div class="info-card">
+                    <h3 class="card-heading">National Institute of Technology Puducherry (NITPY)</h3>
+                    <p class="card-subheading">Bachelor of Technology, Computer Science & Engineering | Expected 2024</p>
+                    <p>CGPA: 8.33/10 (6 semesters). An Institute of National Importance.</p>
+                </div>
+                <div class="info-card">
+                    <h3 class="card-heading">FIITJEE Junior College, Hyderabad</h3>
+                    <p class="card-subheading">Senior Secondary (TSBIE) | 2020</p>
+                    <p>Percentage: 95.9%</p>
+                </div>
+                <div class="info-card">
+                    <h3 class="card-heading">Kennedy High The Global School, Hyderabad</h3>
+                    <p class="card-subheading">Secondary (CBSE) | 2018</p>
+                    <p>Percentage: 90.8%</p>
+                </div>
+            </section>
+            
+            <section id="achievements" class="data-section">
+                <h2 class="section-header"><span class="themed-prefix">ACCOLADES_LOG //</span> Scholastic Achievements</h2>
+                <div class="info-card">
+                    <ul>
+                        <li>Secured First position in Blind Coding Challenge, Gyanith Tech Fest of NIT Puducherry, India (2023).</li>
+                        <li>Secured Third prize (amongst ~90 members) in Hackathon organized by NIE Mysore, India (2023).</li>
+                        <li>Secured All India Rank 206 in inter NIT coding marathon organized by MNIT Bhopal, India (2022).</li>
+                        <li>Secured 99.1 percentile (amongst top 1 percentile out of over 1 million students) in All India JEE-Mains Entrance Examination (2020).</li>
+                    </ul>
+                </div>
+                 <h3 style="text-align: center; font-family: var(--font-display); color: var(--secondary-text); font-size: 1.2rem; margin-top: -30px; margin-bottom: 20px;">EXTRACURRICULARS</h3>
+                 <div class="info-card">
+                     <ul>
+                        <li>First place in Weightlifting competition organized by NIT PY, India (2023).</li>
+                        <li>First place in Origami Speedster competition at NIT PY, LECIEL, India (2022).</li>
+                        <li>Winner in inter-departmental Basketball competition NIT PY, India (2021).</li>
+                        <li>First position in inter-house Art/Craft competition, Kennedy High School, India (2017).</li>
+                        <li>Certificate of Excellence for being All Rounder, Kennedy High School, India (2017).</li>
+                        <li>Runners-up (Captain) position in Inter-house Basketball (juniors) competition, Kennedy High, Hyderabad, India (2015).</li>
+                     </ul>
+                 </div>
+            </section>
+
+            <section id="courses" class="data-section">
+                 <h2 class="section-header"><span class="themed-prefix">TRAINING_MODULES //</span> Certifications & Courses</h2>
+                <div class="info-card">
+                    <h3 class="card-heading">Workshop on High Dimensional Data Analytics using Python and Julia</h3>
+                    <p class="card-subheading">Vellore Institute of Technology (VIT), Vellore, India | 2023</p>
+                </div>
+                <div class="info-card">
+                    <h3 class="card-heading">Accelerated Computer Science Fundamentals Specialization</h3>
+                    <p class="card-subheading">University of Illinois at Urbana-Champaign, USA (Coursera Online) | 2022</p>
+                </div>
+                <div class="info-card">
+                    <h3 class="card-heading">Mathematics for Machine Learning Specialization</h3>
+                    <p class="card-subheading">Imperial College of London, UK (Coursera Online) | 2022</p>
+                </div>
+                 <div class="info-card">
+                    <h3 class="card-heading">SQL (Basic) & Python (Basic) Certifications</h3>
+                    <p class="card-subheading">HackerRank | 2021</p>
+                </div>
+                 <div class="info-card">
+                    <h3 class="card-heading">The Complete 2023 Web Development Bootcamp</h3>
+                    <p class="card-subheading">Udemy | 2023</p>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="main-footer">
+            <!-- Footer (largely unchanged) -->
+            <div class="content-container">
+                <p>SYSTEM_STATUS :: ONLINE :: Shanmukha Srinivas Sai Chatadi &copy; <span id="currentYear"></span></p>
+                <p>// END_OF_TRANSMISSION //</p>
+            </div>
+        </footer>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="js/main.js"></script> </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Preloader, GSAP, Reduced Motion, Three.js (largely unchanged from previous complete version)
+        const preloader = document.getElementById('preloader');
+        const preloaderBar = preloader.querySelector('.preloader-bar');
+        let loadProgress = 0;
+        const preloaderInterval = setInterval(() => {
+            loadProgress += 20;
+            if (preloaderBar) preloaderBar.style.width = loadProgress + '%';
+            if (loadProgress >= 100) {
+                clearInterval(preloaderInterval);
+                setTimeout(() => {
+                    if(preloader) preloader.classList.add('fade-out');
+                    setTimeout(() => { if(preloader) preloader.style.display = 'none'; }, 500);
+                }, 300);
+            }
+        }, 100);
+
+        gsap.registerPlugin(ScrollTrigger);
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        function getCssVariableValue(variableName) { return getComputedStyle(document.documentElement).getPropertyValue(variableName).trim(); }
+
+        let scene, camera, renderer, distantStars, dynamicParticles, orbitalElements = [];
+        const STAR_COUNT_DISTANT = 3000, PARTICLE_COUNT_DYNAMIC = 300, ORBITAL_COUNT = 7; 
+
+        function initThreeJS() { /* ... Same Three.js init code as before ... */ 
+            const canvas = document.getElementById('threejs-nebula');
+            if (!canvas) return;
+
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 3000);
+            camera.position.z = 60;
+
+            renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+
+            const accentCyan = new THREE.Color(getCssVariableValue('--accent-cyan') || '#00f2ff');
+            const accentMagenta = new THREE.Color(getCssVariableValue('--accent-magenta') || '#ff00c1');
+            const accentBlue = new THREE.Color(getCssVariableValue('--accent-blue') || '#4d88ff');
+
+            const starGeo = new THREE.BufferGeometry();
+            const starPos = [];
+            for (let i = 0; i < STAR_COUNT_DISTANT; i++) { starPos.push((Math.random() - 0.5) * 2000, (Math.random() - 0.5) * 2000, (Math.random() - 0.5) * 2000); }
+            starGeo.setAttribute('position', new THREE.Float32BufferAttribute(starPos, 3));
+            const starMat = new THREE.PointsMaterial({ color: 0xaaaaaa, size: 0.7, sizeAttenuation: true, transparent: true, opacity: 0.4, blending: THREE.AdditiveBlending, depthWrite: false });
+            distantStars = new THREE.Points(starGeo, starMat);
+            scene.add(distantStars);
+
+            const dynamicParticleGeo = new THREE.BufferGeometry();
+            const dpPositions = new Float32Array(PARTICLE_COUNT_DYNAMIC * 3), dpColors = new Float32Array(PARTICLE_COUNT_DYNAMIC * 3);
+            dynamicParticles = new THREE.Points(dynamicParticleGeo, {}); 
+            dynamicParticles.userData = { velocities: [] };
+            for (let i = 0; i < PARTICLE_COUNT_DYNAMIC; i++) {
+                const i3 = i * 3;
+                dpPositions[i3] = (Math.random() - 0.5) * 80; dpPositions[i3 + 1] = (Math.random() - 0.5) * 80; dpPositions[i3 + 2] = (Math.random() - 0.5) * 80;
+                const color = Math.random() > 0.6 ? accentCyan : (Math.random() > 0.5 ? accentMagenta : accentBlue);
+                dpColors[i3] = color.r; dpColors[i3 + 1] = color.g; dpColors[i3 + 2] = color.b;
+                dynamicParticles.userData.velocities.push(new THREE.Vector3((Math.random() - 0.5) * 0.03, (Math.random() - 0.5) * 0.03, (Math.random() - 0.5) * 0.03));
+            }
+            dynamicParticleGeo.setAttribute('position', new THREE.BufferAttribute(dpPositions, 3));
+            dynamicParticleGeo.setAttribute('color', new THREE.BufferAttribute(dpColors, 3));
+            const dynamicParticleMat = new THREE.PointsMaterial({ size: 2.0, vertexColors: true, map: new THREE.TextureLoader().load('https://threejs.org/examples/textures/sprites/disc.png'), blending: THREE.AdditiveBlending, depthTest: false, transparent: true, opacity: 0.8 });
+            dynamicParticles.material = dynamicParticleMat;
+            scene.add(dynamicParticles);
+
+            const orbitalMat = new THREE.MeshStandardMaterial({ metalness: 0.7, roughness: 0.4, flatShading: false, side: THREE.DoubleSide });
+            const geometries = [ new THREE.IcosahedronGeometry(1.5, 0), new THREE.OctahedronGeometry(1.8, 0), new THREE.DodecahedronGeometry(1.6, 0), new THREE.TetrahedronGeometry(1.7,0), new THREE.TorusKnotGeometry( 1, 0.3, 100, 8 )];
+             for (let i = 0; i < ORBITAL_COUNT; i++) {
+                const geo = geometries[i % geometries.length];
+                const orbital = new THREE.Mesh(geo, orbitalMat.clone());
+                orbital.material.color = Math.random() > 0.5 ? (Math.random() > 0.5 ? accentCyan.clone() : accentBlue.clone()) : accentMagenta.clone();
+                orbital.material.emissive = orbital.material.color.clone().multiplyScalar(0.2); 
+                orbital.material.needsUpdate = true;
+                const radius = Math.random() * 30 + 20; 
+                const angle = Math.random() * Math.PI * 2;
+                const yPos = (Math.random() - 0.5) * 20; 
+                orbital.position.set(Math.cos(angle) * radius, yPos, Math.sin(angle) * radius);
+                orbital.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI);
+                orbital.userData = {
+                    radius: radius, angle: angle, 
+                    speed: (Math.random() * 0.006 + 0.002) * (Math.random() < 0.5 ? 1 : -1), 
+                    yBase: yPos, yAmplitude: Math.random() * 8 + 3, yFreq: Math.random() * 0.6 + 0.2,
+                    rotXSpeed: (Math.random() - 0.5) * 0.02, rotYSpeed: (Math.random() - 0.5) * 0.02, rotZSpeed: (Math.random() - 0.5) * 0.02,
+                    scalePulseFreq: Math.random() * 0.5 + 0.3, scalePulseAmp: Math.random() * 0.1 + 0.05, 
+                    emissivePulseFreq: Math.random() * 0.4 + 0.2, emissivePulseAmp: 0.3 
+                };
+                scene.add(orbital);
+                orbitalElements.push(orbital);
+            }
+            const hemiLight = new THREE.HemisphereLight(0xffffff, 0x333388, 0.5); scene.add(hemiLight);
+            const dirLight = new THREE.DirectionalLight(0xffffff, 0.3); dirLight.position.set(5, 10, 7); scene.add(dirLight);
+            const pointLight1 = new THREE.PointLight(accentCyan, 0.7, 150); pointLight1.position.set(20, 10, 30); scene.add(pointLight1);
+            const pointLight2 = new THREE.PointLight(accentMagenta, 0.5, 150); pointLight2.position.set(-20, -5, -20); scene.add(pointLight2);
+            window.addEventListener('resize', onWindowResizeThree, false);
+            document.addEventListener('mousemove', onMouseMoveThree);
+            animateThree();
+        }
+        let mouseXThree = 0, mouseYThree = 0;
+        function onMouseMoveThree(event) { mouseXThree = (event.clientX / window.innerWidth) * 2 - 1; mouseYThree = -(event.clientY / window.innerHeight) * 2 + 1; }
+        function onWindowResizeThree() { if (!camera || !renderer) return; camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth, window.innerHeight); }
+        const clockThree = new THREE.Clock();
+        function animateThree() { /* ... Same Three.js animate code as before ... */ 
+             if (!scene || !camera || !renderer) return;
+            requestAnimationFrame(animateThree);
+            const delta = clockThree.getDelta(); const elapsedTime = clockThree.getElapsedTime();
+            if (!prefersReducedMotion) {
+                camera.position.x += (mouseXThree * 15 - camera.position.x) * 0.01 * delta * 60;
+                camera.position.y += (-mouseYThree * 15 - camera.position.y) * 0.01 * delta * 60;
+            }
+            camera.lookAt(scene.position);
+            if (distantStars) distantStars.rotation.y = elapsedTime * 0.01;
+            if (dynamicParticles && dynamicParticles.geometry && dynamicParticles.userData.velocities) {
+                if (!prefersReducedMotion) dynamicParticles.rotation.y = elapsedTime * 0.03;
+                const positions = dynamicParticles.geometry.attributes.position.array; const velocities = dynamicParticles.userData.velocities;
+                const bounds = 60;
+                for (let i = 0; i < PARTICLE_COUNT_DYNAMIC; i++) {
+                    const i3 = i * 3;
+                    if (!prefersReducedMotion) {
+                        positions[i3] += velocities[i].x * delta * 60; positions[i3 + 1] += velocities[i].y * delta * 60; positions[i3 + 2] += velocities[i].z * delta * 60;
+                        if (positions[i3] > bounds || positions[i3] < -bounds) positions[i3] = -Math.sign(positions[i3]) * bounds;
+                        if (positions[i3+1] > bounds || positions[i3+1] < -bounds) positions[i3+1] = -Math.sign(positions[i3+1]) * bounds;
+                        if (positions[i3+2] > bounds || positions[i3+2] < -bounds) positions[i3+2] = -Math.sign(positions[i3+2]) * bounds;
+                    }
+                }
+                if (!prefersReducedMotion) dynamicParticles.geometry.attributes.position.needsUpdate = true;
+            }
+            orbitalElements.forEach(obj => {
+                if (!prefersReducedMotion) {
+                    obj.userData.angle += obj.userData.speed * delta * 60;
+                    obj.position.x = Math.cos(obj.userData.angle) * obj.userData.radius;
+                    obj.position.z = Math.sin(obj.userData.angle) * obj.userData.radius;
+                    obj.position.y = obj.userData.yBase + Math.sin(elapsedTime * obj.userData.yFreq) * obj.userData.yAmplitude;
+                    obj.rotation.x += obj.userData.rotXSpeed * delta * 60;
+                    obj.rotation.y += obj.userData.rotYSpeed * delta * 60;
+                    obj.rotation.z += obj.userData.rotZSpeed * delta * 60;
+                    const scalePulse = 1 + Math.sin(elapsedTime * obj.userData.scalePulseFreq) * obj.userData.scalePulseAmp;
+                    obj.scale.set(scalePulse, scalePulse, scalePulse);
+                    const emissiveIntensity = 0.2 + (Math.sin(elapsedTime * obj.userData.emissivePulseFreq) * 0.5 + 0.5) * obj.userData.emissivePulseAmp;
+                    obj.material.emissiveIntensity = emissiveIntensity;
+                } else { 
+                    obj.scale.set(1,1,1);
+                    obj.material.emissiveIntensity = 0.2;
+                }
+            });
+            renderer.render(scene, camera);
+        }
+
+        if (!prefersReducedMotion) { initThreeJS(); } 
+        else { const nebulaCanvas = document.getElementById('threejs-nebula'); if (nebulaCanvas) nebulaCanvas.style.display = 'none'; }
+
+        // GSAP Animations (largely unchanged from previous complete version)
+        const heroTitleMain = document.querySelector('.hero-title-main');
+        if (heroTitleMain) {
+            const nameText = "Shanmukha Srinivas Sai Chatadi";
+            nameText.split("").forEach(char => {
+                const span = document.createElement('span'); span.className = 'char';
+                span.textContent = char === " " ? "\u00A0" : char; heroTitleMain.appendChild(span);
+            });
+        }
+        if (!prefersReducedMotion) {
+            const tlHero = gsap.timeline({ defaults: { ease: "expo.out" }});
+            tlHero.to(".hero-title-main", { opacity: 1, duration: 0.1 }) 
+                  .to(".hero-title-main .char", { opacity: 1, y: 0, scale: 1, stagger: 0.04, duration: 1, delay: 0.2 })
+                  .to(".hero-subtitle-role", { opacity: 1, y: 0, duration: 0.8 }, "-=0.7")
+                  .to(".hero-nav-links a", { opacity: 1, y: 0, stagger: 0.1, duration: 0.7 }, "-=0.5")
+                  .to(".scroll-prompt", { opacity: 1, duration: 0.8 }, "-=0.3");
+            gsap.utils.toArray('.data-section').forEach(section => {
+                const heading = section.querySelector('.section-header'); const cards = section.querySelectorAll('.info-card');
+                const tlSection = gsap.timeline({ scrollTrigger: { trigger: section, start: "top 80%", end: "bottom 20%", toggleClass: { targets: section, className: "is-visible" }, once: true } });
+                if (heading) { tlSection.fromTo(heading, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }); }
+                if (cards.length > 0) { tlSection.fromTo(cards, { opacity: 0, y: 50, rotationX: -10, scale: 0.98 }, { opacity: 1, y: 0, rotationX: 0, scale: 1, duration: 0.6, stagger: 0.15, ease: "power2.out" }, heading ? "-=0.4" : "+=0"); }
+            });
+        } else {
+            gsap.set(".hero-title-main", { opacity: 1 }); 
+            gsap.set(".hero-title-main .char", { opacity: 1, y: 0, scale: 1 });
+            gsap.set(".hero-subtitle-role", { opacity: 1, y: 0 });
+            gsap.set(".hero-nav-links a", { opacity: 1, y: 0 });
+            gsap.set(".scroll-prompt", { opacity: 1 });
+            gsap.utils.toArray('.data-section').forEach(section => {
+                gsap.set(section.querySelector('.section-header'), { opacity: 1, y: 0 });
+                gsap.set(section.querySelectorAll('.info-card'), { opacity: 1, y: 0, rotationX: 0, scale: 1 });
+                section.classList.add('is-visible');
+            });
+        }
+        
+        // LOTTIE ANIMATIONS (Simplified - only for Skills section)
+        const lottieFiles = {
+            // Update these paths to your actual local Lottie JSON files for skills
+            'lottie-code': 'assets/lottie_animations/lottie-code.json', 
+            'lottie-ai': 'assets/lottie_animations/lottie-ai.json',    
+            'lottie-cloud': 'assets/lottie_animations/lottie-cloud.json'
+            // Lottie IDs for project cards have been removed from HTML and this object
+        };
+        for (const id in lottieFiles) { // This loop now only targets the 3 skill icons
+            const container = document.getElementById(id);
+            if (container && typeof lottie !== 'undefined') {
+                try {
+                    lottie.loadAnimation({
+                        container: container, renderer: 'svg', 
+                        loop: !prefersReducedMotion, autoplay: !prefersReducedMotion, path: lottieFiles[id]
+                    });
+                } catch (e) { console.warn("Lottie failed for:", id, e); }
+            }
+        }
+
+        // Dynamic Year & Sticky Nav (largely unchanged)
+        const yearSpan = document.getElementById('currentYear');
+        if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+        const stickyNav = document.getElementById('sticky-nav');
+        const heroSector = document.querySelector('.hero-sector');
+        const navLinks = stickyNav ? stickyNav.querySelectorAll('ul li a') : [];
+        if (stickyNav && heroSector) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > heroSector.offsetHeight - 100) { stickyNav.classList.add('visible'); } 
+                else { stickyNav.classList.remove('visible'); }
+                let currentSectionId = "";
+                const sections = gsap.utils.toArray('.data-section'); // Make sure all new sections have class 'data-section'
+                sections.forEach(section => {
+                    if (section && typeof section.offsetTop === 'number' && typeof stickyNav.offsetHeight === 'number') {
+                        if (window.scrollY >= section.offsetTop - stickyNav.offsetHeight - 50) { currentSectionId = section.id; }
+                    }
+                });
+                if (navLinks) { navLinks.forEach(link => { link.classList.remove('active'); if (link.getAttribute('href') === `#${currentSectionId}`) { link.classList.add('active'); } }); }
+            });
+        }
+    });
+    </script>
+</body>
 </html>
